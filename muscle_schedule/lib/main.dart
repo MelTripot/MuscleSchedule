@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:muscle_schedule/navgbar.dart';
+import 'package:muscle_schedule/widget/navgbar.dart';
 
 void main() {
   runApp(const MyApp());

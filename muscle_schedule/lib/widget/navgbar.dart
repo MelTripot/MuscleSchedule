@@ -13,24 +13,6 @@ class _NavbarState extends State<Navbar> {
 
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 3: Settings',
-      style: optionStyle,
-    ),
-  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -50,6 +32,11 @@ class _NavbarState extends State<Navbar> {
         BottomNavigationBarItem(
           icon: Icon(Icons.date_range),
           label: 'Calendar',
+          backgroundColor: bgrdColor,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.add),
+          label: 'Add',
           backgroundColor: bgrdColor,
         ),
         BottomNavigationBarItem(
