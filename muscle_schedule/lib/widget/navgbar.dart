@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Navbar extends StatefulWidget {
-  const Navbar({Key? key}) : super(key: key);
+  Navbar({Key? key}) : super(key: key);
 
   @override
   State<Navbar> createState() => _NavbarState();
+
+  String Page = '';
 }
 
 class _NavbarState extends State<Navbar> {
