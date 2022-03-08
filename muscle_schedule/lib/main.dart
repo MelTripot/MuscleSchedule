@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:muscle_schedule/pages/calendar.dart';
+import 'package:muscle_schedule/pages/workout.dart';
 import 'package:muscle_schedule/widget/navgbar.dart';
 
 void main() {
@@ -49,42 +51,29 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  void _incrementCounter() {}
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  var display = WorkoutPage();
+
+  Widget getpage() {
+    if (Navbar().page == 0) {
+      display = WorkoutPage();
+    } else if (Navbar().page == 1) {
+      return CalendarPage();
+    } else if (Navbar().page == 2) {
+      return WorkoutPage();
+    } else if (Navbar().page == 3) {
+      return WorkoutPage();
+    } else {
+      return WorkoutPage();
+    }
+    return WorkoutPage();
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'On va mettre une liste la',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
+      body: getpage(),
       bottomNavigationBar: Navbar(),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,

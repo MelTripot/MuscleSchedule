@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:muscle_schedule/widget/navgbar.dart';
 
 class WorkoutPage extends StatefulWidget {
-  const WorkoutPage({Key? key, required this.title}) : super(key: key);
+  WorkoutPage({Key? key}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -13,7 +13,7 @@ class WorkoutPage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String title;
+  final String title = "Work";
 
   @override
   State<WorkoutPage> createState() => _WorkoutPageState();
@@ -71,12 +71,6 @@ class _WorkoutPageState extends State<WorkoutPage> {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: Navbar(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Add',
-        child: const Icon(Icons.add),
       ),
     );
   }

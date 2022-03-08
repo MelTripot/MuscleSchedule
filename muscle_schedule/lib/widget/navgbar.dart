@@ -6,7 +6,7 @@ class Navbar extends StatefulWidget {
   @override
   State<Navbar> createState() => _NavbarState();
 
-  String Page = '';
+  int page = 0;
 }
 
 class _NavbarState extends State<Navbar> {
@@ -19,6 +19,7 @@ class _NavbarState extends State<Navbar> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      widget.page = index;
     });
   }
 
