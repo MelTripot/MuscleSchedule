@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:muscle_schedule/pages/calendar.dart';
+import 'package:muscle_schedule/pages/param.dart';
+import 'package:muscle_schedule/pages/record.dart';
+import 'package:muscle_schedule/pages/search.dart';
 import 'package:muscle_schedule/pages/workout.dart';
 import 'package:muscle_schedule/widget/navgbar.dart';
 
@@ -51,35 +54,32 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  void _incrementCounter() {}
+  int _selectedItem = 0;
+  final _page = [
+    WorkoutPage(),
+    CalendarPage(),
+    SearchPage(),
+    RecordPage(),
+    ParamPage()
+  ];
+  final _pagecontroller = PageController();
 
-  var display = WorkoutPage();
-
-  Widget getpage() {
-    if (Navbar().page == 0) {
-      display = WorkoutPage();
-    } else if (Navbar().page == 1) {
-      return CalendarPage();
-    } else if (Navbar().page == 2) {
-      return WorkoutPage();
-    } else if (Navbar().page == 3) {
-      return WorkoutPage();
-    } else {
-      return WorkoutPage();
-    }
-    return WorkoutPage();
+  void changementPage(int index) {
+    setState(() {
+      _selectedItem = index;
+      _pagecontroller.jumpToPage(index);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: getpage(),
-      bottomNavigationBar: Navbar(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Add',
-        child: const Icon(Icons.add),
+      body: PageView(
+        physics: const NeverScrollableScrollPhysics(),
+        children: _page,
+        controller: _pagecontroller,
       ),
+      bottomNavigationBar: Navbar(changementPage: changementPage),
     );
   }
 }

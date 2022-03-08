@@ -1,12 +1,14 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 class Navbar extends StatefulWidget {
-  Navbar({Key? key}) : super(key: key);
+  final void Function(int) changementPage;
+
+  Navbar({Key? key, required this.changementPage}) : super(key: key);
 
   @override
   State<Navbar> createState() => _NavbarState();
-
-  int page = 0;
 }
 
 class _NavbarState extends State<Navbar> {
@@ -19,8 +21,8 @@ class _NavbarState extends State<Navbar> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      widget.page = index;
     });
+    widget.changementPage(index);
   }
 
   @override
