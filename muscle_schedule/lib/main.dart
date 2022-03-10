@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:muscle_schedule/widget/navgbar.dart';
+import 'package:muscle_schedule/services/wgerApi.dart';
 
 void main() {
   runApp(const MyApp());
@@ -56,9 +57,9 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
-
   @override
   Widget build(BuildContext context) {
+    getExo();
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:muscle_schedule/services/wgerApi.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,16 +40,51 @@ class WorkoutPage extends StatefulWidget {
   State<WorkoutPage> createState() => _WorkoutPageState();
 }
 class _WorkoutPageState extends State<WorkoutPage> {
-  int _counter = 0;
-
+  
   void _addWorkout() {
-    setState(() {
-      _counter++;
-    });
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (context) {
+            (pair) {
+              return ListTile(
+                title: Text(
+                  pair.asPascalCase,
+                  style: TextStyle(fontSize: 18.0),
+                ),
+              );
+            };
+
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Saved Suggestions'),
+            ),
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [TextField(
+                  decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'nom',
+                  ),
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'jour',
+                  ),
+                ),]
+              ),
+            )
+          );
+        },
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    getExo();
+    print("object");
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -83,16 +119,12 @@ class _WorkoutPageState extends State<WorkoutPage> {
           children: <Widget>[
             const Text(
               'On va mettre une liste la',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _addWorkout,
+        onPressed: (() => getExo()),
         tooltip: 'Add',
         child: const Icon(Icons.add),
       ),
@@ -100,19 +132,19 @@ class _WorkoutPageState extends State<WorkoutPage> {
   }
 }
 class Exercice {
-  String name; 
-  String status;
-  String description;
-  int category;
-  String muscles;
-  String muscles_secondary;
-  String equipment;
+  String? name; 
+  String? status;
+  String? description;
+  int? category;
+  String? muscles;
+  String? muscles_secondary;
+  String? equipment;
   Exercice({required this.name, required this.status, required this.description, required this.category, required this.muscles, required this.muscles_secondary, required this.equipment});
 }
 
 class Workout {
   String name;
-  String day;
-  Exercice exercice; 
+  DateTime? day;
+  List<Exercice?> exercice; 
   Workout({required this.name, required this.day ,required this.exercice });
 }
