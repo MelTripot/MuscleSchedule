@@ -16,11 +16,18 @@ Future<void> getExo() async {
     },
   );
 // List<dynamic> body = json.decode(response.body) ;
-  var body = jsonDecode(response.body) as Map<String, dynamic>;
-  int compteur = 0;
-  for (var exo in body["results"]) {
-    print(exo["name"]);
-    compteur++;
-    print(compteur);
-  }
+ var body = jsonDecode(response.body) as Map<String, dynamic>;
+ for (var exo in body["results"]) {
+  exercices.add(
+    Exercice(
+      name: exo["name"], 
+      status: exo["status"], 
+      description: exo["description"], 
+      category: exo["category"], 
+      muscles: exo["muscles"], 
+      muscles_secondary: exo["muscles_secondary"], 
+      equipment: exo["equipment"]
+    )
+  );
+ }
 }

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:muscle_schedule/services/wgerApi.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( MyApp());
 }
+  List<Workout> workout = [];
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+ MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -153,6 +153,6 @@ class Exercice {
 class Workout {
   String name;
   DateTime? day;
-  List<Exercice?> exercice;
-  Workout({required this.name, required this.day, required this.exercice});
+  List<Exercice?> exercice; 
+  Workout({required this.name, required this.day ,required this.exercice });
 }
