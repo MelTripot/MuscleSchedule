@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:muscle_schedule/pages/workout.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../utils.dart';
@@ -11,7 +12,7 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
-  late final ValueNotifier<List<Event>> _selectedEvents;
+  late final ValueNotifier<List<Workout>> _selectedWorkouts;
   CalendarFormat _calendarFormat = CalendarFormat.month;
   RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
       .toggledOff; // Can be toggled on/off by longpressing a date
@@ -25,26 +26,26 @@ class _CalendarPageState extends State<CalendarPage> {
     super.initState();
 
     _selectedDay = _focusedDay;
-    _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
+    _selectedWorkouts = ValueNotifier(_getWorkoutForDay(_selectedDay!));
   }
 
   @override
   void dispose() {
-    _selectedEvents.dispose();
+    _selectedWorkouts.dispose();
     super.dispose();
   }
 
-  List<Event> _getEventsForDay(DateTime day) {
+  List<Workout> _getWorkoutForDay(DateTime day) {
     // Implementation example
-    return kWorkOut[day] ?? [];
+    return getWod(day);
   }
 
-  List<Event> _getEventsForRange(DateTime start, DateTime end) {
+  List<Workout> _getWorkoutForRange(DateTime start, DateTime end) {
     // Implementation example
     final days = daysInRange(start, end);
 
     return [
-      for (final d in days) ..._getEventsForDay(d),
+      for (final d in days) ..._getWorkoutForDay(d),
     ];
   }
 
@@ -58,7 +59,7 @@ class _CalendarPageState extends State<CalendarPage> {
         _rangeSelectionMode = RangeSelectionMode.toggledOff;
       });
 
-      _selectedEvents.value = _getEventsForDay(selectedDay);
+      _selectedWorkouts.value = _getWorkoutForDay(selectedDay);
     }
   }
 
@@ -73,11 +74,11 @@ class _CalendarPageState extends State<CalendarPage> {
 
     // `start` or `end` could be null
     if (start != null && end != null) {
-      _selectedEvents.value = _getEventsForRange(start, end);
+      _selectedWorkouts.value = _getWorkoutForRange(start, end);
     } else if (start != null) {
-      _selectedEvents.value = _getEventsForDay(start);
+      _selectedWorkouts.value = _getWorkoutForDay(start);
     } else if (end != null) {
-      _selectedEvents.value = _getEventsForDay(end);
+      _selectedWorkouts.value = _getWorkoutForDay(end);
     }
   }
 
@@ -85,11 +86,11 @@ class _CalendarPageState extends State<CalendarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TableCalendar - Events'),
+        title: const Text('Calendrier'),
       ),
       body: Column(
         children: [
-          TableCalendar<Event>(
+          TableCalendar<Workout>(
             firstDay: kFirstDay,
             lastDay: kLastDay,
             focusedDay: _focusedDay,
@@ -98,7 +99,7 @@ class _CalendarPageState extends State<CalendarPage> {
             rangeEndDay: _rangeEnd,
             calendarFormat: _calendarFormat,
             rangeSelectionMode: _rangeSelectionMode,
-            eventLoader: _getEventsForDay,
+            eventLoader: _getWorkoutForDay,
             startingDayOfWeek: StartingDayOfWeek.monday,
             calendarStyle: const CalendarStyle(
               // Use `CalendarStyle` to customize the UI
@@ -119,8 +120,8 @@ class _CalendarPageState extends State<CalendarPage> {
           ),
           const SizedBox(height: 8.0),
           Expanded(
-            child: ValueListenableBuilder<List<Event>>(
-              valueListenable: _selectedEvents,
+            child: ValueListenableBuilder<List<Workout>>(
+              valueListenable: _selectedWorkouts,
               builder: (context, value, _) {
                 return ListView.builder(
                   itemCount: value.length,
