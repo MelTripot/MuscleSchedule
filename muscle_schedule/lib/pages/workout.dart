@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
 }
 
 class WorkoutPage extends StatefulWidget {
-  const WorkoutPage({Key? key, required this.title}) : super(key: key);
+  const WorkoutPage({Key? key}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -34,48 +34,48 @@ class WorkoutPage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String title;
+  final String title = 'Workout';
 
   @override
   State<WorkoutPage> createState() => _WorkoutPageState();
 }
+
 class _WorkoutPageState extends State<WorkoutPage> {
-  
   void _addWorkout() {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (context) {
-            (pair) {
-              return ListTile(
-                title: Text(
-                  pair.asPascalCase,
-                  style: TextStyle(fontSize: 18.0),
-                ),
-              );
-            };
+          (pair) {
+            return ListTile(
+              title: Text(
+                pair.asPascalCase,
+                style: TextStyle(fontSize: 18.0),
+              ),
+            );
+          };
 
           return Scaffold(
-            appBar: AppBar(
-              title: const Text('Saved Suggestions'),
-            ),
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [TextField(
-                  decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'nom',
-                  ),
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'jour',
-                  ),
-                ),]
+              appBar: AppBar(
+                title: const Text('Saved Suggestions'),
               ),
-            )
-          );
+              body: Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'nom',
+                        ),
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'jour',
+                        ),
+                      ),
+                    ]),
+              ));
         },
       ),
     );
@@ -131,20 +131,28 @@ class _WorkoutPageState extends State<WorkoutPage> {
     );
   }
 }
+
 class Exercice {
-  String? name; 
+  String? name;
   String? status;
   String? description;
   int? category;
   String? muscles;
   String? muscles_secondary;
   String? equipment;
-  Exercice({required this.name, required this.status, required this.description, required this.category, required this.muscles, required this.muscles_secondary, required this.equipment});
+  Exercice(
+      {required this.name,
+      required this.status,
+      required this.description,
+      required this.category,
+      required this.muscles,
+      required this.muscles_secondary,
+      required this.equipment});
 }
 
 class Workout {
   String name;
   DateTime? day;
-  List<Exercice?> exercice; 
-  Workout({required this.name, required this.day ,required this.exercice });
+  List<Exercice?> exercice;
+  Workout({required this.name, required this.day, required this.exercice});
 }
