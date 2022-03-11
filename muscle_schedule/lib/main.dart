@@ -5,6 +5,7 @@ import 'package:muscle_schedule/pages/record.dart';
 import 'package:muscle_schedule/pages/search.dart';
 import 'package:muscle_schedule/pages/workout.dart';
 import 'package:muscle_schedule/widget/navgbar.dart';
+import 'package:muscle_schedule/services/wgerApi.dart';
 
 void main() {
   runApp(const MyApp());
@@ -70,7 +71,6 @@ class _MyHomePageState extends State<MyHomePage> {
       _pagecontroller.jumpToPage(index);
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

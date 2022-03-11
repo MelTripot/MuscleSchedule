@@ -1,8 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:muscle_schedule/widget/navgbar.dart';
+import 'package:muscle_schedule/services/wgerApi.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Workout',
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+        ),
+      ),
+    );
+  }
+}
 
 class WorkoutPage extends StatefulWidget {
-  WorkoutPage({Key? key}) : super(key: key);
+  const WorkoutPage({Key? key, required this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -13,23 +34,57 @@ class WorkoutPage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String title = "Work";
+  final String title;
 
   @override
   State<WorkoutPage> createState() => _WorkoutPageState();
 }
-
 class _WorkoutPageState extends State<WorkoutPage> {
-  int _counter = 0;
+  
+  void _addWorkout() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (context) {
+            (pair) {
+              return ListTile(
+                title: Text(
+                  pair.asPascalCase,
+                  style: TextStyle(fontSize: 18.0),
+                ),
+              );
+            };
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Saved Suggestions'),
+            ),
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [TextField(
+                  decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'nom',
+                  ),
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'jour',
+                  ),
+                ),]
+              ),
+            )
+          );
+        },
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    getExo();
+    print("object");
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -38,7 +93,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the WorkoutPage object that was created by
+        // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
@@ -64,14 +119,32 @@ class _WorkoutPageState extends State<WorkoutPage> {
           children: <Widget>[
             const Text(
               'On va mettre une liste la',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            )
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (() => getExo()),
+        tooltip: 'Add',
+        child: const Icon(Icons.add),
+      ),
     );
   }
+}
+class Exercice {
+  String? name; 
+  String? status;
+  String? description;
+  int? category;
+  String? muscles;
+  String? muscles_secondary;
+  String? equipment;
+  Exercice({required this.name, required this.status, required this.description, required this.category, required this.muscles, required this.muscles_secondary, required this.equipment});
+}
+
+class Workout {
+  String name;
+  DateTime? day;
+  List<Exercice?> exercice; 
+  Workout({required this.name, required this.day ,required this.exercice });
 }
