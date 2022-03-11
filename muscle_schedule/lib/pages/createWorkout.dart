@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:muscle_schedule/pages/workout.dart';
 import 'package:muscle_schedule/services/wgerApi.dart';
+import 'package:muscle_schedule/utils.dart';
 
 
 class CreateWorkout extends StatefulWidget {
-  const CreateWorkout({ Key? key }) : super(key: key);
+  final void Function(bool) test;
+  const CreateWorkout({ Key? key, required this.test}) : super(key: key);
   
   @override
   State<CreateWorkout> createState() => _CreateWorkoutState();
@@ -44,8 +46,8 @@ class _CreateWorkoutState extends State<CreateWorkout> {
                     style: ButtonStyle(
                       foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
                     ),
-                    onPressed: () => addWorkout(_controllerName.text , day, select),
-                    child: Text('TextButton'),
+                    onPressed: () => addWorkout(_controllerName.text , day, select, context),
+                    child: Text('Save Workout'),
                   )
                 ]
               ),
@@ -82,25 +84,30 @@ class _CreateWorkoutState extends State<CreateWorkout> {
         style: _biggerFont,
       ),
       trailing: Icon(
-        alreadySaved ? Icons.check_box : Icons.check_box,
+        alreadySaved ? Icons.check : Icons.check_box,
         color: alreadySaved ? Colors.blue : null,
         semanticLabel: alreadySaved ? 'Remove from saved' : 'Save',
       ),
       onTap: () {
         // NEW lines from here...
+
         setState(() {
           if (alreadySaved) {
             select.remove(pair);
           } else {
             select.add(pair);
           }
+          print(select[select.length -1].name);
         });
       },
     );
   }
+void addWorkout(String name, DateTime? day, List<Exercice> exo, BuildContext context) {
+ MyWorkout.add(Workout(name: name, day: day, exercice: exo));
+ widget.test(true);
+  Navigator.pop(context);
+
 }
-void addWorkout(String name, DateTime? day, List<Exercice> exo) {
- workout.add(Workout(name: name, day: day, exercice: exo));
 }
 
 
