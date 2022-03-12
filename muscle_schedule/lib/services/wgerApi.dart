@@ -17,10 +17,20 @@ Future<void> getExo() async {
   );
 // List<dynamic> body = json.decode(response.body) ;
   var body = jsonDecode(response.body) as Map<String, dynamic>;
-  int compteur = 0;
+  int compt = 0;
   for (var exo in body["results"]) {
-    print(exo["name"]);
-    compteur++;
-    print(compteur);
+    List<int> convertM = exo["muscles"].cast<int>();
+    List<int> convertM2 = exo["muscles_secondary"].cast<int>();
+    List<int> convertEq = exo["equipment"].cast<int>();
+    exercices.add(Exercice(
+        name: exo["name"],
+        status: exo["status"],
+        description: exo["description"],
+        category: exo["category"],
+        muscles: convertM,
+        muscles_secondary: convertM2,
+        equipment: convertEq));
+    print(exercices[compt].name);
+    compt++;
   }
 }

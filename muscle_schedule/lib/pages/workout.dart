@@ -133,13 +133,13 @@ class _WorkoutPageState extends State<WorkoutPage> {
 }
 
 class Exercice {
-  String? name;
+  String name;
   String? status;
   String? description;
   int? category;
-  String? muscles;
-  String? muscles_secondary;
-  String? equipment;
+  List<int> muscles;
+  List<int> muscles_secondary;
+  List<int> equipment;
   Exercice(
       {required this.name,
       required this.status,
