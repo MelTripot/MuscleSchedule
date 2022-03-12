@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:muscle_schedule/pages/exerciceDetail.dart';
 import 'package:muscle_schedule/pages/workout.dart';
 import 'package:muscle_schedule/services/wgerApi.dart';
 import 'package:muscle_schedule/widget/navgbar.dart';
@@ -57,9 +58,9 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(widget.title),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
       ),
       body: Container(
         child: Column(
@@ -86,6 +87,14 @@ class _SearchPageState extends State<SearchPage> {
                 itemBuilder: (context, index) {
                   return ListTile(
                     title: Text('${items[index].name}'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ExerciceDetailsPage(exo: items[index])),
+                      );
+                    },
                   );
                 },
               ),
