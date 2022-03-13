@@ -2,7 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import 'dart:collection';
+import 'dart:js';
 
+import 'package:flutter/material.dart';
 import 'package:muscle_schedule/pages/workout.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -52,3 +54,13 @@ final kToday = DateTime.now();
 final kFirstDay = DateTime(kToday.year, kToday.month - 3, kToday.day);
 final kLastDay = DateTime(kToday.year, kToday.month + 3, kToday.day);
 List<Workout> MyWorkout = [] ;
+List<Exercice> exercices = [];
+DateTime? day;
+    Future <void> getDate(context) async {
+      day = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2300)
+      );
+    }
