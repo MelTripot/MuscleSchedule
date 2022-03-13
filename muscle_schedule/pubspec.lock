@@ -69,6 +69,27 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_keyboard_visibility:
+    dependency: transitive
+    description:
+      name: flutter_keyboard_visibility
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.2.0"
+  flutter_keyboard_visibility_platform_interface:
+    dependency: transitive
+    description:
+      name: flutter_keyboard_visibility_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
+  flutter_keyboard_visibility_web:
+    dependency: transitive
+    description:
+      name: flutter_keyboard_visibility_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -78,6 +99,18 @@ packages:
     version: "1.0.4"
   flutter_test:
     dependency: "direct dev"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  flutter_typeahead:
+    dependency: "direct main"
+    description:
+      name: flutter_typeahead
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.4"
+  flutter_web_plugins:
+    dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -109,6 +142,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.17.0"
+  js:
+    dependency: transitive
+    description:
+      name: js
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.3"
   lints:
     dependency: transitive
     description:
@@ -123,6 +163,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.11"
+  material_color_utilities:
+    dependency: transitive
+    description:
+      name: material_color_utilities
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.3"
   meta:
     dependency: transitive
     description:
@@ -137,6 +184,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  plugin_platform_interface:
+    dependency: transitive
+    description:
+      name: plugin_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.2"
   simple_gesture_detector:
     dependency: transitive
     description:
@@ -149,6 +203,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  smart_select:
+    dependency: "direct main"
+    description:
+      name: smart_select
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.3.2"
   source_span:
     dependency: transitive
     description:
@@ -197,7 +258,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.3"
+    version: "0.4.8"
   typed_data:
     dependency: transitive
     description:
@@ -214,4 +275,4 @@ packages:
     version: "2.1.1"
 sdks:
   dart: ">=2.15.1 <3.0.0"
-  flutter: ">=1.17.0"
+  flutter: ">=1.20.0"

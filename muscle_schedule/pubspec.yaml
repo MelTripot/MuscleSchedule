@@ -37,6 +37,8 @@ dependencies:
   table_calendar: ^3.0.4
   http: ^0.13.4
   html: ^0.15.0
+  flutter_typeahead: ^3.2.4
+  smart_select: ^4.3.2
 
 dev_dependencies:
   flutter_test:
