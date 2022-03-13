@@ -4,59 +4,94 @@ import 'package:muscle_schedule/services/wgerApi.dart';
 import 'package:muscle_schedule/utils.dart';
 
 class WorkoutPage extends StatefulWidget {
-  const WorkoutPage({ Key? key }) : super(key: key);
+  const WorkoutPage({Key? key}) : super(key: key);
   final String title = 'Workout';
   @override
   State<WorkoutPage> createState() => _WorkoutPageState();
 }
 
 class _WorkoutPageState extends State<WorkoutPage> {
+  final _biggerFont = const TextStyle(fontSize: 18.0);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: 
-            MyWorkout.isNotEmpty ?
-            ListView.builder(
-            padding: const EdgeInsets.all(16.0),
-            itemCount: MyWorkout.length,
-            itemBuilder: /*1*/ (context, i) {
-              print(i);
-              print(MyWorkout.length);
-              
-              return _buildRow(MyWorkout[i]);
-            }) : null,
-            floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const CreateWorkout()),
-              );
-            },
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
-            ),
+      body: MyWorkout.isNotEmpty
+          ? ListView.builder(
+              padding: const EdgeInsets.all(16.0),
+              itemCount: MyWorkout.length,
+              itemBuilder: /*1*/ (context, i) {
+                return _buildRowWorkout(MyWorkout[i]);
+              })
+          : null,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => CreateWorkout(callback: () {
+                      setState(() {});
+                    })),
+          );
+        },
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
     );
   }
-  
-  final select = <Exercice>[];
-  final _biggerFont = const TextStyle(fontSize: 18.0);
 
-    Widget _buildRow(Workout pair) {
+  Widget _buildRowWorkout(Workout pair) {
     return ListTile(
       title: Text(
         pair.name!,
         style: _biggerFont,
       ),
-      onTap: () { },
+      onTap: () {
+        _curentWorkout(pair);
+      },
+    );
+  }
+
+  void _curentWorkout(Workout work) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (context) {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Saved Suggestions'),
+            ),
+            body: Center(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '${work.name}',
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    ElevatedButton(
+                        onPressed: () => getDate(context),
+                        child: Text('${work.day}')),
+                    // work.exercice.isNotEmpty
+                    // ? ListView.builder(
+                    //     padding: const EdgeInsets.all(16.0),
+                    //     itemCount: work.exercice.length,
+                    //     itemBuilder: /*1*/ (context, i) {
+                    //       return _buildRowExercice(work.exercice[i]!);
+                    //     })
+                    // : null,
+                  ]),
+            ),
+          );
+        },
+      ),
     );
   }
 }
-
 
 class Exercice {
   String? name;
@@ -79,6 +114,6 @@ class Exercice {
 class Workout {
   String? name;
   DateTime? day;
-  List<Exercice?> exercice; 
-  Workout({required this.name, required this.day ,required this.exercice });
+  List<Exercice?> exercice;
+  Workout({required this.name, required this.day, required this.exercice});
 }
